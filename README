@@ -1,0 +1,28 @@
+Orzata Gabriel-Nicusor
+Tema 1 APD
+
+Am citit din fisierul test.txt fiecare cale catre fisierele de input
+si le-am salvat intr-o lista pe care o dau ca parametru mapperilor.
+Pentru a putea da mai multe valori ca parametru reducerilor si mapperilor
+am creeat structuri de date pe care le dau ca referinta.
+
+Mapper - la inceput fiecare mapper verifica daca mai sunt fisiere de input
+disponibile, si daca mai sunt preiau numele fisierului si il scot din lista
+data ca parametru.
+(totul se face intr-un mutex ca sa nu se produca race condition)
+Apoi citeste numerele din fisier si verifica daca sunt puteri perfecte.
+In caz afirmativ se adauga numarul intr-un vector de hashmap-uri comun intre
+toti mapperi. Indexul vectorului reprezinta id-ul mapperului, iar in hashmap
+key este exponentul la care se ridica numarul din value.
+La final am pus o bariera pentru a face reducerii sa astepte.
+
+Reducer - prima data asteapta la o bariera care se deschide atunci cand ajung
+si mapperi la ea(adica la finalul executiei lor).
+Generez numele fisierului de output si pun toate valorile din lista comuna cu
+puteri perfecte, de la exponentul aferent reducerului, intr-un set pentru a 
+elimina direct dublicatele.
+La final printez in fisierul de output dimensiunea setului.
+
+Functia de puteri perfecte - folosesc cautare binara pentru a verifica daca
+numarul dat se poate ridica la puterea 2, 3, 4...
+La final returnez o lista cu exponentii gasiti.
